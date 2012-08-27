@@ -50,6 +50,7 @@ module Net
         if File.file?(local)
           puts "cp #{remote}" if options[:verbose] == true
           File.binary?(local) ? putbinaryfile(local, remote) : puttextfile(local, remote)
+          yield(f) if block_given?
           
         # ignore . and .., but upload other directories
         elsif !f.match(/^\.+$/)
